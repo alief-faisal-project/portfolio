@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import myPhoto from "@/assets/myphoto.png";
+import myPhotoMobile from "@/assets/myphoto.png";
+import myPhotoDesktop from "@/assets/myphoto2.png";
 import ShinyText from "@/components/ShinyText";
 
 const RESUME_URL =
@@ -32,7 +33,21 @@ const Hero = () => {
 
   const [time, setTime] = useState("");
   const [city, setCity] = useState("Meminta lokasi...");
+  const [isMobile, setIsMobile] = useState(false);
 
+  /* deteksi ukuran layar */
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // jika <768px dianggap mobile
+    };
+
+    handleResize(); // cek pertama kali
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  /* animasi role */
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimate(false);
@@ -105,18 +120,13 @@ const Hero = () => {
         <div className="text-center md:text-left order-2 md:order-1 flex flex-col items-center md:items-start">
           <p className="text-primary text-lg font-medium mb-3">Hallo, Saya</p>
 
-          {/* Nama diubah menjadi warna Biru */}
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
             <span className="text-yellow-600">Alief Faisal</span>
             <br />
-            <span className="text-foreground">
-              {" "}
-              {/* Gunakan text-white jika ingin putih pekat */}
-              Adriansyah
-            </span>
+            <span className="text-foreground">Adriansyah</span>
           </h1>
 
-          {/* Social icons dengan efek Expand */}
+          {/* Social icons */}
           <div className="flex gap-4 mt-6 justify-center md:justify-start">
             {socials.map((s, i) => (
               <a
@@ -142,7 +152,7 @@ const Hero = () => {
           <div className="absolute top-1/2 left-1/2 w-[220px] md:w-[320px] h-[220px] md:h-[320px] -translate-x-1/2 -translate-y-1/2 bg-primary/30 blur-[80px] rounded-full" />
 
           <img
-            src={myPhoto}
+            src={isMobile ? myPhotoMobile : myPhotoDesktop}
             alt="Alief Faisal Adriansyah"
             className="relative w-[420px] md:w-[650px] max-w-none object-cover object-top scale-110"
           />
@@ -150,14 +160,12 @@ const Hero = () => {
 
         {/* Right */}
         <div className="text-center md:text-right order-3 hidden md:block">
-          {/* lokasi + jam */}
           <div className="mb-10 -mt-6 font-bold text-lg text-foreground leading-tight">
             <div>{city}</div>
             <div className="text-base text-muted-foreground">{time}</div>
           </div>
 
           <h2 className="text-4xl md:text-6xl font-extrabold leading-tight overflow-hidden">
-            {/* Role diubah menjadi warna Biru */}
             <span
               className={`text-yellow-600 inline-block transition-all duration-500 ${
                 animate
