@@ -95,7 +95,7 @@ const Projects = () => {
             <a
               key={i}
               href={p.link}
-              className="group flex-shrink-0 w-[90%] md:w-[48%] snap-start overflow-hidden relative"
+              className="group flex-shrink-0 w-[90%] md:w-[48%] snap-start overflow-hidden relative rounded-3xl"
             >
               {/* IMAGE */}
               <img
@@ -150,7 +150,7 @@ const Projects = () => {
           {projects.map((_, i) => (
             <span
               key={i}
-              className={`w-2 h-2 rounded-full ${
+              className={`w-4 h-2 rounded-full ${
                 i === activeIndex ? "bg-primary" : "bg-muted"
               }`}
             />
