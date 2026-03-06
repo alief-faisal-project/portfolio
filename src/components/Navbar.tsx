@@ -50,7 +50,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop navbar */}
-      <nav className="hidden md:block fixed left-1/2 -translate-x-1/2 top-9 z-50">
+      <nav className="hidden md:block fixed left-1/2 -translate-x-1/2 top-3 z-50">
         <div className=" px-8 py-3 ">
           <div className="flex gap-10">
             {navItems.map((item) => (

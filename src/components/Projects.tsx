@@ -106,39 +106,34 @@ const Projects = () => {
 
               {/* DIAGONAL OVERLAY */}
               <div
-                className="
-                absolute inset-0
-                bg-black/60
-                flex flex-col justify-end
-                p-6
-                text-white
-                transform translate-y-[65%]
-                group-hover:translate-y-0
-                transition duration-700
-                "
+                className={`
+    absolute inset-0
+    bg-black/60
+    flex flex-col justify-end
+    p-6
+    text-white
+    transform transition duration-700
+    ${i === activeIndex ? "translate-y-0" : "translate-y-[65%]"}
+    group-hover:translate-y-0
+  `}
                 style={{
                   clipPath: "polygon(0 35%, 100% 0%, 100% 100%, 0% 100%)",
                 }}
               >
                 <div className="transition-all duration-500">
-                  {/* TITLE */}
                   <h3 className="text-lg group-hover:text-2xl font-bold transition-all duration-500">
                     {p.title}
                   </h3>
-
-                  {/* DESCRIPTION */}
                   <p
-                    className="
-                    mt-3 text-sm max-w-md
-                    opacity-0 translate-y-4
-                    group-hover:opacity-100
-                    group-hover:translate-y-0
-                    transition duration-500
-                    "
+                    className={`
+        mt-3 text-sm max-w-md
+        transition duration-500
+        ${i === activeIndex ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+        group-hover:opacity-100 group-hover:translate-y-0
+      `}
                   >
                     {p.desc}
                   </p>
-
                 </div>
               </div>
             </a>
