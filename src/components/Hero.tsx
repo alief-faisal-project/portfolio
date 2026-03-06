@@ -148,13 +148,13 @@ const Hero = () => {
         </div>
 
         {/* Center photo */}
-        <div className="flex justify-center order-1 md:order-2 relative -mt-16 md:mt-0 top-8">
+        <div className="flex justify-center order-1 md:order-2 relative -mt-16 md:mt-0 top-1">
           <div className="absolute top-1/2 left-1/2 w-[220px] md:w-[320px] h-[220px] md:h-[320px] -translate-x-1/2 -translate-y-1/2 bg-primary/30 blur-[80px] rounded-full" />
 
           <img
             src={isMobile ? myPhotoMobile : myPhotoDesktop}
             alt="Alief Faisal Adriansyah"
-            className="relative w-[420px] md:w-[650px] max-w-none object-cover object-top scale-110"
+            className="relative w-[440px] md:w-[650px] max-w-none object-cover object-top scale-110"
           />
         </div>
 
