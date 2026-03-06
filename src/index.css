@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background utama hitam, tulisan putih */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Primary putih agar kontras di atas hitam */
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 100%;
+
+    --radius: 0.75rem;
+
+    --font-sans: 'Open Sans', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Parallax stacking sections */
+.section-stack {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+.section-stack:nth-child(1) { z-index: 1; }
+.section-stack:nth-child(2) { z-index: 2; }
+.section-stack:nth-child(3) { z-index: 3; }
+.section-stack:nth-child(4) { z-index: 4; }
+.section-stack:nth-child(5) { z-index: 5; }
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glow effect - disesuaikan untuk background gelap */
+.glow-yellow {
+  box-shadow: 0 0 80px 20px hsl(0 0% 100% / 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
