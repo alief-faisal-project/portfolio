@@ -20,7 +20,7 @@ const socials = [
   },
   {
     icon: "fa-brands fa-whatsapp",
-    href: "https://wa.me/6281234567890",
+    href: "https://wa.me/6283120996468",
     label: "WhatsApp",
   },
 ];
@@ -32,7 +32,7 @@ const Hero = () => {
   const [animate, setAnimate] = useState(true);
 
   const [time, setTime] = useState("");
-  const [city, setCity] = useState("Meminta lokasi...");
+  const [city, setCity] = useState("Mencari lokasi Lo...");
   const [isMobile, setIsMobile] = useState(false);
 
   /* deteksi ukuran layar */

@@ -82,7 +82,7 @@ const Navbar = () => {
               }`}
             ></span>
             <span
-              className={`block w-8 h-0.5 bg-white mt-2 transition-transform duration-[700ms] ${
+              className={`block w-8 h-0.5 bg-white mt-2 transition-transform duration-[500ms] ${
                 isOpen ? "-rotate-45 -translate-y-1.5" : ""
               }`}
             ></span>
