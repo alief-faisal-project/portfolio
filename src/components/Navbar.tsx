@@ -67,35 +67,40 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
       {/* Mobile navbar */}
-      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-transparent  ">
-        <div className="px-6 py-4 flex justify-end">
+      <nav className="md:hidden fixed top-0 left-0 right-0 z-50">
+        {/* Tombol hamburger / X */}
+        <div className="px-6 py-4 flex justify-end relative z-50">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="relative w-8 h-8 flex flex-col justify-center items-center"
           >
             {/* Hamburger bars */}
             <span
-              className={`block w-8 h-0.5 bg-white transition-transform duration-300 ${
+              className={`block w-8 h-0.5 bg-white transition-transform duration-[700ms] ${
                 isOpen ? "rotate-45 translate-y-1.5" : ""
               }`}
             ></span>
             <span
-              className={`block w-8 h-0.5 bg-white mt-2 transition-transform duration-300 ${
+              className={`block w-8 h-0.5 bg-white mt-2 transition-transform duration-[700ms] ${
                 isOpen ? "-rotate-45 -translate-y-1.5" : ""
               }`}
             ></span>
           </button>
         </div>
 
-        {isOpen && (
-          <div className="px-16 pb-4 flex flex-col gap-4 ">
+        {/* Menu muncul mentok ke atas dengan animasi slide-down */}
+        <div
+          className={`absolute top-0 left-0 right-0 overflow-hidden transition-all duration-[700ms] ease-in-out ${
+            isOpen ? "max-h-screen" : "max-h-0"
+          }`}
+        >
+          <div className="px-6 pt-16 pb-6 flex flex-col gap-4 bg-background/90 backdrop-blur-md">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`text-left font-bold ${
+                className={`text-left font-bold text-lg ${
                   activeSection === item.id
                     ? "text-foreground"
                     : "text-muted-foreground"
@@ -105,7 +110,7 @@ const Navbar = () => {
               </button>
             ))}
           </div>
-        )}
+        </div>
       </nav>
     </>
   );
