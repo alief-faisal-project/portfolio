@@ -16,7 +16,7 @@ const About = () => {
         </p>
 
         <p className="text-gray-300 leading-relaxed text-justify">
-          Saya berdedikasi untuk menciptakan teknologi yang mampu menyelesaikan
+          Saya berdedikasi untuk mengembangkan teknologi yang mampu menyelesaikan
           masalah nyata. Dengan pendekatan problem-solving yang terstruktur dan
           kemampuan beradaptasi yang cepat, saya siap memberikan dampak positif
           dan menghadapi tantangan teknis bersama.
