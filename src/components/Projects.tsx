@@ -122,23 +122,33 @@ const Projects = () => {
                   transition-all duration-700
                   bg-black/60
                   transform
-                  ${isMobile ? "translate-y-0" : "md:translate-y-[65%] md:group-hover:translate-y-0"}
+                  ${
+                    isMobile
+                      ? i === activeIndex
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                      : "md:translate-y-[65%] md:group-hover:translate-y-0"
+                  }
                 `}
                 style={{
                   clipPath: "polygon(0 35%, 100% 0%, 100% 100%, 0% 100%)",
                 }}
               >
                 <div className="p-6 transition-all duration-500">
-                  {/* Judul selalu terlihat */}
                   <h3 className="text-lg font-bold transition-all duration-500 md:group-hover:text-2xl">
                     {p.title}
                   </h3>
-                  {/* Deskripsi: tampil langsung di mobile, muncul saat hover di desktop */}
                   <p
                     className={`
                       mt-3 text-sm max-w-md
                       transition duration-500
-                      ${isMobile ? "opacity-100 translate-y-0" : "md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0"}
+                      ${
+                        isMobile
+                          ? i === activeIndex
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-4"
+                          : "md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0"
+                      }
                     `}
                   >
                     {p.desc}
