@@ -90,7 +90,7 @@ const Navbar = () => {
         </div>
 
         {isOpen && (
-          <div className="px-6 pb-4 flex flex-col gap-4 bg-background/80 backdrop-blur-md">
+          <div className="px-16 pb-4 flex flex-col gap-4 ">
             {navItems.map((item) => (
               <button
                 key={item.id}
