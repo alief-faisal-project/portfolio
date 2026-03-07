@@ -100,7 +100,7 @@ const Projects = () => {
             <a
               key={i}
               href={p.link}
-              className="group flex-shrink-0 w-full md:w-[48%] snap-start overflow-hidden relative rounded-3xl"
+              className="group flex-shrink-0 w-full md:w-[48%] snap-start overflow-hidden relative"
             >
               {/* IMAGE */}
               <img
