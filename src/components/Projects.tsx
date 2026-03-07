@@ -34,6 +34,7 @@ const projects = [
 const Projects = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const scroll = (dir: number) => {
     if (!scrollRef.current) return;
@@ -55,6 +56,13 @@ const Projects = () => {
 
     el.addEventListener("scroll", handler);
     return () => el.removeEventListener("scroll", handler);
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
@@ -107,15 +115,15 @@ const Projects = () => {
 
               {/* OVERLAY */}
               <div
-                className="
+                className={`
                   absolute inset-0
                   flex flex-col justify-end
                   text-white
                   transition-all duration-700
                   bg-black/60
-                  transform md:translate-y-[65%]
-                  md:group-hover:translate-y-0
-                "
+                  transform
+                  ${isMobile ? "translate-y-0" : "md:translate-y-[65%] md:group-hover:translate-y-0"}
+                `}
                 style={{
                   clipPath: "polygon(0 35%, 100% 0%, 100% 100%, 0% 100%)",
                 }}
@@ -127,13 +135,11 @@ const Projects = () => {
                   </h3>
                   {/* Deskripsi: tampil langsung di mobile, muncul saat hover di desktop */}
                   <p
-                    className="
+                    className={`
                       mt-3 text-sm max-w-md
-                      opacity-100 translate-y-0
-                      md:opacity-0 md:translate-y-4
                       transition duration-500
-                      md:group-hover:opacity-100 md:group-hover:translate-y-0
-                    "
+                      ${isMobile ? "opacity-100 translate-y-0" : "md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0"}
+                    `}
                   >
                     {p.desc}
                   </p>
