@@ -84,3 +84,60 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* From Uiverse.io by Gaurav-WebDev */
+.button {
+  height: 38px;
+  width: 110px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+
+.type1::after {
+  content: "Download";
+  height: 38px;
+  width: 110px;
+  background-color: #7a0000;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(38px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Resume";
+  height: 38px;
+  width: 110px;
+  background-color: #ca8a04;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.1);
+}
+
+.type1:hover::before {
+  transform: translateY(-38px) scale(0) rotate(120deg);
+}

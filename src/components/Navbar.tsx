@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 const navItems = [
   { label: "Beranda", id: "hero" },
-  { label: "Tentang Saya", id: "about" },
-  { label: "Projek Saya", id: "projects" },
+  { label: "Tentang", id: "about" },
+  { label: "Projek", id: "projects" },
 ];
 
 const Navbar = () => {
@@ -58,7 +58,7 @@ const Navbar = () => {
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
                 className={`text-sm font-bold transition-colors ${
-                  activeSection === item.id ? "text-white" : "text-white"
+                  activeSection === item.id ? "text-yellow-600" : "text-foregorund-muted"
                 }`}
               >
                 {item.label}

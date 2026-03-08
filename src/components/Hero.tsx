@@ -179,12 +179,8 @@ const Hero = () => {
             <span className="text-foreground">Developer</span>
           </h2>
 
-          <a
-            href={RESUME_URL}
-            download
-            className="inline-flex items-center gap-2 mt-10 text-sm text-muted-foreground hover:text-yellow-600 transition-colors"
-          >
-            RESUME <i className="fa-solid fa-download" />
+          <a href={RESUME_URL} download className="mt-10 inline-block">
+            <button className="button type1"></button>
           </a>
         </div>
       </div>

@@ -34,7 +34,6 @@ const projects = [
 const Projects = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
   const scroll = (dir: number) => {
     if (!scrollRef.current) return;
@@ -48,21 +47,12 @@ const Projects = () => {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-
     const handler = () => {
       const cardWidth = (el.children[0]?.clientWidth ?? 300) + 24;
       setActiveIndex(Math.round(el.scrollLeft / cardWidth));
     };
-
     el.addEventListener("scroll", handler);
     return () => el.removeEventListener("scroll", handler);
-  }, []);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
@@ -71,100 +61,106 @@ const Projects = () => {
       className="section-stack flex items-center justify-center min-h-screen bg-background"
     >
       <div className="max-w-6xl mx-auto px-6 py-20 w-full">
-        <div className="text-center mb-12">
-          <h2 className="text-5xl font-bold text-foreground">Projek Saya</h2>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-foreground">
+             <span className="text-primary">Projek</span>
+          </h2>
         </div>
 
-        {/* NAV BUTTON */}
-        <div className="hidden md:flex justify-end gap-2 mb-6">
+        {/* Desktop arrows */}
+        <div className="hidden md:flex justify-end gap-2 mb-4">
           <button
             onClick={() => scroll(-1)}
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-primary transition"
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
           >
             <i className="fa-solid fa-chevron-left" />
           </button>
           <button
             onClick={() => scroll(1)}
-            className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-primary transition"
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
           >
             <i className="fa-solid fa-chevron-right" />
           </button>
         </div>
 
-        {/* PROJECT LIST */}
+        {/* Cards */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
+          className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
         >
-          {projects.map((p, i) => (
-            <a
-              key={i}
-              href={p.link}
-              className="group flex-shrink-0 w-full md:w-[48%] snap-start overflow-hidden relative"
-            >
-              {/* IMAGE */}
-              <img
-                src={p.image}
-                alt={p.title}
-                className="
-                  w-full 
-                  h-auto md:h-[360px] 
-                  object-contain md:object-cover
-                "
-              />
-
-              {/* OVERLAY */}
-              <div
-                className={`
-                  absolute inset-0
-                  flex flex-col justify-end
-                  text-white
-                  transition-all duration-700
-                  bg-black/60
-                  transform
-                  ${
-                    isMobile
-                      ? i === activeIndex
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-full opacity-0"
-                      : "md:translate-y-[65%] md:group-hover:translate-y-0"
-                  }
-                `}
-                style={{
-                  clipPath: "polygon(0 35%, 100% 0%, 100% 100%, 0% 100%)",
-                }}
+          {projects.map((p, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <a
+                key={i}
+                href={p.link}
+                className="group flex-shrink-0 w-[85vw] md:w-[calc(50%-12px)] overflow-hidden bg-card snap-start"
               >
-                <div className="p-6 transition-all duration-500">
-                  <h3 className="text-lg font-bold transition-all duration-500 md:group-hover:text-2xl">
-                    {p.title}
-                  </h3>
-                  <p
-                    className={`
-                      mt-3 text-sm max-w-md
-                      transition duration-500
-                      ${
-                        isMobile
-                          ? i === activeIndex
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-4"
-                          : "md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0"
-                      }
-                    `}
-                  >
-                    {p.desc}
-                  </p>
+                <div className="relative overflow-hidden aspect-[3/2]">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover transition-transform duration-500"
+                    style={{
+                      transform:
+                        isActive && window.innerWidth < 768
+                          ? "scale(1.1)"
+                          : undefined,
+                    }}
+                    loading="lazy"
+                  />
+                  {/* Overlay - diagonal before hover, full solid on hover/active */}
+                  <div
+                    className="absolute inset-0 bg-card/70 transition-all duration-500 ease-out"
+                    style={{
+                      clipPath:
+                        isActive && window.innerWidth < 768
+                          ? "polygon(-5% 0%, 115% 0%, 115% 110%, -5% 110%)"
+                          : "polygon(-5% 65%, 115% 80%, 115% 110%, -10% 110%)",
+                    }}
+                    ref={(el) => {
+                      if (!el) return;
+                      const parent = el.closest(".group");
+                      if (!parent) return;
+
+                      parent.addEventListener("mouseenter", () => {
+                        el.style.clipPath =
+                          "polygon(-5% 0%, 115% 0%, 115% 110%, -5% 110%)";
+                      });
+
+                      parent.addEventListener("mouseleave", () => {
+                        el.style.clipPath =
+                          "polygon(-5% 65%, 115% 80%, 115% 110%, -10% 110%)";
+                      });
+                    }}
+                  />
+                  {/* Text */}
+                  <div className="absolute inset-x-0 bottom-0 p-5 z-10">
+                    <h3 className="text-base font-bold text-foreground mb-1">
+                      {p.title}
+                    </h3>
+                    <p
+                      className={`text-sm text-muted-foreground leading-relaxed overflow-hidden transition-all duration-500 delay-100 ${
+                        isActive && window.innerWidth < 768
+                          ? "max-h-32 opacity-100"
+                          : "max-h-0 opacity-0 group-hover:max-h-32 group-hover:opacity-100"
+                      }`}
+                    >
+                      {p.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
 
-        {/* MOBILE DOT */}
-        <div className="flex md:hidden justify-center gap-2 mt-6">
+        {/* Mobile indicators */}
+        <div className="flex md:hidden justify-center gap-2 mt-4">
           {projects.map((_, i) => (
             <span
               key={i}
-              className={`w-4 h-2 rounded-full ${
+              className={`w-2 h-2 rounded-full transition-colors ${
                 i === activeIndex ? "bg-primary" : "bg-muted"
               }`}
             />
